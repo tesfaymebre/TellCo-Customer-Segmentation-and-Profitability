@@ -46,11 +46,7 @@ def aggregate_user_data(df):
     return user_aggregates
 
 # Define a function to process and calculate application totals
-def process_application_totals(user_aggregates):
-    applications = [
-        "social media", "youtube", "netflix", 
-        "google", "email", "gaming", "other"
-    ]
+def process_application_totals(user_aggregates,applications):
     for app in applications:
         user_aggregates = calculate_total_data(user_aggregates, app)
     return user_aggregates

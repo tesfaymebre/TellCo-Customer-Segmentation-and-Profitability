@@ -88,5 +88,14 @@ def impute_missing_values(df, group_column, value_column):
     Returns:
         The DataFrame with missing values imputed.
     """
-    df[value_column] = df.groupby(group_column)[value_column].transform(lambda x: x.fillna(x.median()))
+    # Check if the column exists
+    if value_column not in df.columns:
+        raise ValueError(f"Column '{value_column}' does not exist in the DataFrame.")
+    
+    # Grouped median imputation, skipping groups where the value column is entirely NaN
+    medians = df.groupby(group_column)[value_column].median()
+    df[value_column] = df.apply(
+        lambda row: medians[row[group_column]] if pd.isnull(row[value_column]) and row[group_column] in medians else row[value_column],
+        axis=1
+    )
     return df
