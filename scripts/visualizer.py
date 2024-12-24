@@ -46,3 +46,12 @@ def plot_correlation_matrix(data):
     sns.heatmap(data.corr(), annot=True, cmap='coolwarm', fmt='.2f', linewidths=2)
     plt.title('Correlation Matrix')
     plt.show()
+
+def plot_top_applications(app_traffic, color, top_n=3):
+    total_app_traffic = app_traffic.sum().sort_values(ascending=False).head(top_n)
+    print(f"Top {top_n} Most Used Applications:")
+    print(total_app_traffic)
+    
+    total_app_traffic.plot(kind='bar', title=f'Top {top_n} Most Used Applications', color=color)
+    plt.ylabel('Total Traffic (Bytes)')
+    plt.show()
