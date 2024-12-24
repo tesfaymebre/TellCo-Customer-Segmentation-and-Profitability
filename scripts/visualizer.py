@@ -17,6 +17,22 @@ def bi_variate_plot(data, column1, column2, title, xlabel, ylabel, color):
     plt.ylabel(ylabel)
     plt.show()
 
+# Analyze relationships between applications and total data
+def bi_variate_plot2(df, applications):
+    """
+    Function to analyze relationships between applications and total data.
+    
+    Parameters:
+    df (pd.DataFrame): The dataframe containing the data.
+    applications (list): List of application names to analyze.
+    
+    Returns:
+    None
+    """
+    sns.pairplot(df, vars=[f'total {app} data' for app in applications])
+    plt.suptitle("Bivariate Analysis of Applications and Total Data")
+    plt.show()
+
 def plot_histogram(data, column, bins, title, xlabel, ylabel, color, kde=False):
     plt.hist(data[column], bins=bins, color=color, edgecolor='black', density=kde)
     plt.title(title)
